@@ -12,20 +12,21 @@ knitr::opts_chunk$set(echo = TRUE)
 ## Correlation between Population Size and Average SARS-CoV-2 Detection Proportion
 
 ```{r plot_correlation, echo=FALSE, message=FALSE, warning=FALSE}
-# Load necessary libraries
-library(dplyr)
+# Load necessary packages and data (if not already loaded)
 library(ggplot2)
+library(dplyr)
+library(here)
 
 # Load data
 path_to_data <- here::here("Raw_Data", "wastewater_2024-10-28_subset.csv")
 wastewater_data <- read.csv(path_to_data, header = TRUE)
 
-# Group and calculate average detection proportion by population served
+# Process data
 avg_detect_prop_by_population <- wastewater_data %>%
   group_by(population_served) %>%
   summarise(avg_detect_prop_15d = mean(detect_prop_15d, na.rm = TRUE))
 
-# Create scatterplot
+# Create and display the plot
 p <- ggplot(avg_detect_prop_by_population, aes(x = population_served, y = avg_detect_prop_15d)) +
   geom_point(alpha = 0.6) +
   ggtitle("Correlation between Population Size and Average SARS-CoV-2 Detection Proportion") +
@@ -33,7 +34,7 @@ p <- ggplot(avg_detect_prop_by_population, aes(x = population_served, y = avg_de
   ylab("Average Proportion of Tests with SARS-CoV-2 Detected") +
   theme_minimal()
 
-print(p)
+print(p)  # Display the plot in the report
 
 ```
 

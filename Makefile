@@ -1,25 +1,23 @@
 # Makefile for generating the report
+# Makefile for automating data analysis and report generation
 
 # Variables
-PLOT_SCRIPT = 01_make_plot.R
-RENDER_SCRIPT = 02_render_report.R
-REPORT = Report.Rmd
-OUTPUT_PNG = Output/plot.png
-OUTPUT_REPORT = Report.html
+R_SCRIPT = Rscript
+RMD_FILE = Report.Rmd
+OUTPUT_HTML = Report.html
 
-# Default target
-all: $(OUTPUT_REPORT)
+# Targets
+all: $(OUTPUT_HTML)
 
-# Target to generate plot
-$(OUTPUT_PNG): $(PLOT_SCRIPT)
-	Rscript $(PLOT_SCRIPT)
+# Step 1: Generate plot
+plot:
+	$(R_SCRIPT) Code/01_make_plot.R
 
-# Target to generate the report
-$(OUTPUT_REPORT): $(RENDER_SCRIPT) $(OUTPUT_PNG) $(REPORT)
-	Rscript $(RENDER_SCRIPT)
+# Step 2: Render report
+$(OUTPUT_HTML): $(RMD_FILE)
+	$(R_SCRIPT) Code/02_render_report.R
 
-# Clean up generated files
+# Clean up generated files (if necessary)
 clean:
-	rm -f $(OUTPUT_PNG) $(OUTPUT_REPORT)
+	rm -f $(OUTPUT_HTML) Output/plot.png
 
-.PHONY: all clean
