@@ -37,4 +37,3 @@ p <- ggplot(avg_detect_prop_by_population, aes(x = population_served, y = avg_de
 print(p)  # Display the plot in the report
 
 ```
-
