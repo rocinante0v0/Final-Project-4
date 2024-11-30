@@ -40,3 +40,10 @@ The code for creating the required table (average detection proportions) is incl
 
 ## Code for Figure Creation
 The code for creating the required scatterplot figure is found in `Code/01_make_plot.R`.
+
+## Reproducing the Project Environment
+
+To restore the R package environment used in this project, run the following command in your terminal:
+
+```bash
+make install
