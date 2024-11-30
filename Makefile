@@ -21,3 +21,5 @@ $(OUTPUT_HTML): $(RMD_FILE)
 clean:
 	rm -f $(OUTPUT_HTML) Output/plot.png
 
+install:
+	Rscript -e 'renv::restore()'
